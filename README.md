@@ -1,2 +1,2 @@
 # ben-rowan.github.io
-My Blog
+My >> [blog](https://ben-rowan.github.io/) <<
