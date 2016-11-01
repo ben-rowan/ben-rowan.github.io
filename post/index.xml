@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Post-rsses on </title>
+    <link>http://ben-rowan.github.io/post/index.xml</link>
+    <description>Recent content in Post-rsses on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>Released under the MIT license.</copyright>
+    <lastBuildDate>Sun, 30 Oct 2016 20:04:45 +0000</lastBuildDate>
+    <atom:link href="http://ben-rowan.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>LearnOpenGL.com - Setup Gotchas on Ubuntu 16.04 and Code::Blocks</title>
+      <link>http://ben-rowan.github.io/post/setup_gotchas_on_ubuntu_16_04_and_code_blocks/</link>
+      <pubDate>Sun, 30 Oct 2016 20:04:45 +0000</pubDate>
+      
+      <guid>http://ben-rowan.github.io/post/setup_gotchas_on_ubuntu_16_04_and_code_blocks/</guid>
+      <description>
+
+&lt;p&gt;I began working through the fantastic OpenGL tutorials on
+&lt;a href=&#34;http://learnopengl.com/&#34;&gt;learnopengl.com&lt;/a&gt; today and hit a couple of issues
+along the way.&lt;/p&gt;
+
+&lt;p&gt;Most of the issues I hit were caused by the fact that the tutorials
+are heavily biased towards Windows and Visual Studio while I&amp;rsquo;m using
+Ubuntu 16.04 and Code::Blocks.&lt;/p&gt;
+
+&lt;h1 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h1&gt;
+
+&lt;p&gt;The first issue I needed to resolve was the installation of the dependencies
+for GLFW. These can be installed using the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; \
+sudo apt-get -y install \
+build-essential \
+libx11-dev \
+libxrandr-dev \
+libxinerama-dev \
+libxcursor-dev \
+libgl1-mesa-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;linker&#34;&gt;Linker&lt;/h1&gt;
+
+&lt;p&gt;The next issue I faced was linking the GLFW library with my project in
+Code::Blocks.&lt;/p&gt;
+
+&lt;p&gt;After compiling the GLFW library from source (as per the tutorial) I
+decided to install GLFW from the Ubuntu repos (just to be sure I had a version
+that was compiled correctly).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install libglfw3-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The tutorial recomended the following compiler flags to let the linker know
+where the required libraries are located:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-lGLEW -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But these flags gave me the following error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cannot find -lglfw3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After a quick &lt;code&gt;find&lt;/code&gt; I found that the issue was the library name. It was not
+called libglfw3 but was instead called libglfw:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ find / -name *glfw* 2&amp;gt;/dev/null
+...
+/usr/lib/x86_64-linux-gnu/libglfw.so
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To fix the issue you need to use &lt;code&gt;-lglfw&lt;/code&gt; in place of &lt;code&gt;-lglfw3&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;NOTE:
+To set compiler linker flags in Code::Blocks you need to go to Settings &amp;gt;
+Compiler &amp;gt; Global Compiler Settings &amp;gt; Linker Settings &amp;gt; Other Linker Options&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;nullptr&#34;&gt;nullptr&lt;/h1&gt;
+
+&lt;p&gt;I also had an issue with the &lt;code&gt;nullptr&lt;/code&gt;s used in the example code even though
+my version of g++ is &lt;code&gt;5.4.0&lt;/code&gt;. I was getting the following error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;error: ‘nullptr’ was not declared in this scope
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To fix this I had to add the following compiler flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-std=gnu++0x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;NOTE:
+To set compiler flags in Code::Blocks you need to go to Settings &amp;gt;
+Compiler &amp;gt; Global Compiler Settings &amp;gt; Compiler Settings &amp;gt; Other Compiler Options&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;std-cout&#34;&gt;std::cout&lt;/h1&gt;
+
+&lt;p&gt;The final issue I had was with std::cout and std::endl. I was getting the
+following errors:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;error: ‘cout’ is not a member of ‘std’
+error: ‘endl’ is not a member of ‘std’
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to fix this I needed to include &lt;code&gt;iostream&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;iostream&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

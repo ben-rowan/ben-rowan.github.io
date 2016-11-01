@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-uk">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>LearnOpenGL.com - Setup Gotchas on Ubuntu 16.04 and Code::Blocks &middot; </title>
+    <meta name="author" content="Ben Rowan">
+    <meta name="description" content="I&#39;ve created this blog to track my game dev journey.">
+    <meta name="generator" content="Hugo 0.17" />
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <!-- RSS autodiscovery -->
+    
+
+    <link rel="shortcut icon" href="http://ben-rowan.github.io/img/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/2.1.2/normalize.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="http://ben-rowan.github.io/css/screen.css">
+    <link rel="stylesheet" href="http://ben-rowan.github.io/css/github.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+
+    <!-- Stylesheet for theme color -->
+    <style type="text/css">
+    a, a:visited {color: #f05948;}
+    .pagination a {color: #f05948;}
+    .gist .gist-file .gist-meta a:visited {color: #f05948 !important;}
+    a:focus, a:hover {color: #c62310;}
+    h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #c62310;}
+    .older-posts:hover, .newer-posts:hover {color: #c62310;}
+</style>
+</head>
+
+<body class="post-template">
+
+    <header id="site-head">
+	
+	
+</header>
+    
+
+    <main class="content" role="main">
+	    <article class="post">
+	        <header>
+	        <h1 class="post-title">LearnOpenGL.com - Setup Gotchas on Ubuntu 16.04 and Code::Blocks</h1>
+	        <div class="post-meta"><time datetime="30 October 2016">30 October 2016</time></div>
+	        </header>
+
+	        <section class="post-content">
+	            
+
+<p>I began working through the fantastic OpenGL tutorials on
+<a href="http://learnopengl.com/">learnopengl.com</a> today and hit a couple of issues
+along the way.</p>
+
+<p>Most of the issues I hit were caused by the fact that the tutorials
+are heavily biased towards Windows and Visual Studio while I&rsquo;m using
+Ubuntu 16.04 and Code::Blocks.</p>
+
+<h1 id="dependencies">Dependencies</h1>
+
+<p>The first issue I needed to resolve was the installation of the dependencies
+for GLFW. These can be installed using the following command:</p>
+
+<pre><code>sudo apt-get update &amp;&amp; \
+sudo apt-get -y install \
+build-essential \
+libx11-dev \
+libxrandr-dev \
+libxinerama-dev \
+libxcursor-dev \
+libgl1-mesa-dev
+</code></pre>
+
+<h1 id="linker">Linker</h1>
+
+<p>The next issue I faced was linking the GLFW library with my project in
+Code::Blocks.</p>
+
+<p>After compiling the GLFW library from source (as per the tutorial) I
+decided to install GLFW from the Ubuntu repos (just to be sure I had a version
+that was compiled correctly).</p>
+
+<pre><code>sudo apt-get install libglfw3-dev
+</code></pre>
+
+<p>The tutorial recomended the following compiler flags to let the linker know
+where the required libraries are located:</p>
+
+<pre><code>-lGLEW -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi
+</code></pre>
+
+<p>But these flags gave me the following error:</p>
+
+<pre><code>cannot find -lglfw3
+</code></pre>
+
+<p>After a quick <code>find</code> I found that the issue was the library name. It was not
+called libglfw3 but was instead called libglfw:</p>
+
+<pre><code>$ find / -name *glfw* 2&gt;/dev/null
+...
+/usr/lib/x86_64-linux-gnu/libglfw.so
+...
+</code></pre>
+
+<p>To fix the issue you need to use <code>-lglfw</code> in place of <code>-lglfw3</code>.</p>
+
+<blockquote>
+<p>NOTE:
+To set compiler linker flags in Code::Blocks you need to go to Settings &gt;
+Compiler &gt; Global Compiler Settings &gt; Linker Settings &gt; Other Linker Options</p>
+</blockquote>
+
+<h1 id="nullptr">nullptr</h1>
+
+<p>I also had an issue with the <code>nullptr</code>s used in the example code even though
+my version of g++ is <code>5.4.0</code>. I was getting the following error:</p>
+
+<pre><code>error: ‘nullptr’ was not declared in this scope
+</code></pre>
+
+<p>To fix this I had to add the following compiler flag:</p>
+
+<pre><code>-std=gnu++0x
+</code></pre>
+
+<blockquote>
+<p>NOTE:
+To set compiler flags in Code::Blocks you need to go to Settings &gt;
+Compiler &gt; Global Compiler Settings &gt; Compiler Settings &gt; Other Compiler Options</p>
+</blockquote>
+
+<h1 id="std-cout">std::cout</h1>
+
+<p>The final issue I had was with std::cout and std::endl. I was getting the
+following errors:</p>
+
+<pre><code>error: ‘cout’ is not a member of ‘std’
+error: ‘endl’ is not a member of ‘std’
+</code></pre>
+
+<p>In order to fix this I needed to include <code>iostream</code>.</p>
+
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+</code></pre>
+
+	        </section>
+
+	        <section class="post-tags" style="padding-bottom:60px;">
+	            <div class="post-meta tags">
+	            <i class="fa fa-fw fa-tag"></i>
+	            
+	            </div>
+	        </section>
+			
+			
+			
+			
+
+	        <section class="share">
+	            <p class="backtotop"><a data-scroll href="#site-head"><i class="fa fa-lg fa-fw fa-angle-double-up"></i></a><a data-scroll class="backtotoptext" href="#site-head"> Back to top</a></p>
+	            <p class="info prompt">Share</p>
+	            <a href="http://twitter.com/share?text=LearnOpenGL.com%20-%20Setup%20Gotchas%20on%20Ubuntu%2016.04%20and%20Code%3a%3aBlocks&url=http%3a%2f%2fben-rowan.github.io%2fpost%2fsetup_gotchas_on_ubuntu_16_04_and_code_blocks%2f" title="Share on Twitter"
+	                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+	                <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+	            </a>
+	            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fben-rowan.github.io%2fpost%2fsetup_gotchas_on_ubuntu_16_04_and_code_blocks%2f" title="Share on Facebook"
+	                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+	                <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+	            </a>
+	            <a href="https://plus.google.com/share?url=http%3a%2f%2fben-rowan.github.io%2fpost%2fsetup_gotchas_on_ubuntu_16_04_and_code_blocks%2f" title="Share on Google+"
+	               onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+	                <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+	            </a>
+	        </section>
+
+	        <footer class="post-footer">
+	            <section class="author">
+    <div class="authorimage" style="background: url(http://ben-rowan.github.io/img/avatar.jpg)"></div>
+    <h4>Ben Rowan</h4>
+    <p class="bio">Full time web developer and dad working in Leeds/Bradford UK.</p>
+    <p class="meta">
+      <i class="fa fa-fw fa-map-marker"></i> Leeds UK
+    </p>
+</section>
+	        </footer>
+	    </article>
+	</main>
+
+    <footer class="site-footer">
+	<div class="inner">
+		<section class="footer-social">
+			
+		    
+		    
+		    <a href="" target="_blank" title="RSS"><i class="fa fa-2x fa-fw fa-rss"></i> <span class="hidden">RSS</span></a>
+		</section>
+
+		<section class="copyright">&copy; 2016 <a href="http://ben-rowan.github.io/">Ben Rowan</a>. Released under the MIT license.</section>
+	</div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://ben-rowan.github.io/js/index.js"></script>
+<script src="http://ben-rowan.github.io/js/smooth-scroll.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+
+<script>
+    smoothScroll.init({
+        speed: 800,
+        easing: 'easeInOutCubic',
+        updateURL: false,
+        offset: 125,
+    });
+</script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
