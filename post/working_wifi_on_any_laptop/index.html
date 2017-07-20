@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>[ LearnOpenGL.com ] - Setup Gotchas on Ubuntu 16.04 and Code::Blocks &middot; </title>
+    <title>[ FreeBSD ] - Working WiFi on Any Laptop &middot; </title>
     <meta name="author" content="Ben Rowan">
     <meta name="description" content="I&#39;ve created this blog to track my game dev journey.">
     <meta name="generator" content="Hugo 0.25" />
@@ -48,112 +48,96 @@
     
 <article class="post">
     <header>
-        <h1 class="post-title">[ LearnOpenGL.com ] - Setup Gotchas on Ubuntu 16.04 and Code::Blocks</h1>
+        <h1 class="post-title">[ FreeBSD ] - Working WiFi on Any Laptop</h1>
         <div class="post-meta">
-            <time datetime="30 October 2016">
-                30 October 2016
+            <time datetime="09 July 2017">
+                09 July 2017
             </time>
         </div>
     </header>
 
     <section class="post-content">
-        <p>I began working through the fantastic OpenGL tutorials on
-<a href="http://learnopengl.com/">learnopengl.com</a> today and hit a couple of issues
-along the way.</p>
-
-<p>Most of the issues I hit were caused by the fact that the tutorials
-are heavily biased towards Windows and Visual Studio while I&rsquo;m using
-Ubuntu 16.04 and Code::Blocks.</p>
+        <p>I recently installed FreeBSD for the first time and installed it on
+my Lenovo X131e. I instantly began battling with it&rsquo;s evil Broadcom
+wireless card. This card had caused me endless trouble on Linux.
+After messing around with it for an hour or two I decided that this
+was the final straw and pulled the card out. I shoved it in a draw
+and plan to never look at it again!</p>
 
 <p></p>
 
-<h1 id="dependencies">Dependencies</h1>
+<p>Phew&hellip; now that&rsquo;s out the way I can get on with describing my
+solution!</p>
 
-<p>The first issue I needed to resolve was the installation of the dependencies
-for GLFW. These can be installed using the following command:</p>
+<p><em>NOTE: this is based on FreeBSD 10.3 and didn&rsquo;t work on TrueOS for me.</em></p>
 
-<pre><code>sudo apt-get update &amp;&amp; \
-sudo apt-get -y install \
-build-essential \
-libx11-dev \
-libxrandr-dev \
-libxinerama-dev \
-libxcursor-dev \
-libgl1-mesa-dev
+<p><strong>TL;DR</strong></p>
+
+<ul>
+<li><p>Buy this: <a href="https://www.asus.com/uk/Networking/USBN10_NANO/">ASUS USB-N10 Nano</a></p></li>
+
+<li><p>Run the commands from &lsquo;<a href="#getting_it_all_setup">Getting It All Setup</a>&lsquo;</p></li>
+</ul>
+
+<h2 id="asus-usb-n10-nano">ASUS USB-N10 Nano</h2>
+
+<p>I opted to go with a USB wireless card. I knew that if I got this working then
+I could use FreeBSD on any of my laptops (or PC&rsquo;s if needed).</p>
+
+<p>After trawling through the
+<a href="https://www.freebsd.org/relnotes/CURRENT/hardware/support.html">supported hardware list</a>
+I landed on the ASUS N10. It&rsquo;s cheap, really small and can easily be left in my
+laptop full time.</p>
+
+<p><span id="getting_it_all_setup"></span></p>
+
+<h2 id="getting-it-all-setup">Getting It All Setup</h2>
+
+<p>Once you&rsquo;ve installed FreeBSD you&rsquo;ll need to complete the following steps to
+get your WiFi working.</p>
+
+<h3 id="load-the-driver-module">Load the Driver Module</h3>
+
+<p>The ASUS N10 uses the <code>rsu</code> driver. You can get all the information you need
+about this driver by running <code>man rsu</code>.</p>
+
+<p>To load the driver add the following to your <code>/boot/loader.conf</code>:</p>
+
+<pre><code class="language-text">if_rsu_load=&quot;YES&quot;
+legal.realtek.license_ack=1
+rsu-rtl8712fw_load=&quot;YES&quot;
 </code></pre>
 
-<h1 id="linker">Linker</h1>
+<h3 id="setup-the-interface">Setup the Interface</h3>
 
-<p>The next issue I faced was linking the GLFW library with my project in
-Code::Blocks.</p>
+<p>To setup the interface add the following to your <code>/etc/rc.conf</code>:</p>
 
-<p>After compiling the GLFW library from source (as per the tutorial) I
-decided to install GLFW from the Ubuntu repos (just to be sure I had a version
-that was compiled correctly).</p>
-
-<pre><code>sudo apt-get install libglfw3-dev
+<pre><code class="language-text">wlans_urtwn0=&quot;wlan0&quot;
+ifconfig_wlan0=&quot;WPA DHCP&quot;
 </code></pre>
 
-<p>The tutorial recomended the following compiler flags to let the linker know
-where the required libraries are located:</p>
+<h3 id="configure-the-connection">Configure the Connection</h3>
 
-<pre><code>-lGLEW -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi
+<p>And finally to configure your connection add the following to your
+<code>/etc/wpa_supplicant.conf</code> (create it if it&rsquo;s not there):</p>
+
+<pre><code class="language-text">network={
+    ssid=&quot;&lt; wireless routers SSID &gt;&quot;
+    psk=&quot;&lt; wireless routers password &gt;&quot;
+}
 </code></pre>
 
-<p>But these flags gave me the following error:</p>
+<p>Now you&rsquo;ve completed these three steps it&rsquo;s time to reboot your machine.
+Once it&rsquo;s booted you should be connected to your configured wireless router
+and good to go.</p>
 
-<pre><code>cannot find -lglfw3
-</code></pre>
+<h2 id="references">References</h2>
 
-<p>After a quick <code>find</code> I found that the issue was the library name. It was not
-called libglfw3 but was instead called libglfw:</p>
-
-<pre><code>$ find / -name *glfw* 2&gt;/dev/null
-...
-/usr/lib/x86_64-linux-gnu/libglfw.so
-...
-</code></pre>
-
-<p>To fix the issue you need to use <code>-lglfw</code> in place of <code>-lglfw3</code>.</p>
-
-<blockquote>
-<p>NOTE:
-To set compiler linker flags in Code::Blocks you need to go to Settings &gt;
-Compiler &gt; Global Compiler Settings &gt; Linker Settings &gt; Other Linker Options</p>
-</blockquote>
-
-<h1 id="nullptr">nullptr</h1>
-
-<p>I also had an issue with the <code>nullptr</code>s used in the example code even though
-my version of g++ is <code>5.4.0</code>. I was getting the following error:</p>
-
-<pre><code>error: ‘nullptr’ was not declared in this scope
-</code></pre>
-
-<p>To fix this I had to add the following compiler flag:</p>
-
-<pre><code>-std=gnu++0x
-</code></pre>
-
-<blockquote>
-<p>NOTE:
-To set compiler flags in Code::Blocks you need to go to Settings &gt;
-Compiler &gt; Global Compiler Settings &gt; Compiler Settings &gt; Other Compiler Options</p>
-</blockquote>
-
-<h1 id="std-cout">std::cout</h1>
-
-<p>The final issue I had was with std::cout and std::endl. I was getting the
-following errors:</p>
-
-<pre><code>error: ‘cout’ is not a member of ‘std’
-error: ‘endl’ is not a member of ‘std’
-</code></pre>
-
-<p>In order to fix this I needed to include <code>iostream</code>.</p>
-
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-</code></pre>
+<ul>
+<li><a href="https://www.asus.com/uk/Networking/USBN10_NANO/">ASUS USB-N10 Nano</a></li>
+<li><a href="https://www.freebsd.org/relnotes/CURRENT/hardware/support.html">Supported Hardware</a></li>
+<li><a href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/network-wireless.html">Wireless Networking</a></li>
+</ul>
     </section>
 
     
@@ -168,15 +152,15 @@ error: ‘endl’ is not a member of ‘std’
     <section class="share">
     <p class="backtotop"><a data-scroll href="#site-head"><i class="fa fa-lg fa-fw fa-angle-double-up"></i></a><a data-scroll class="backtotoptext" href="#site-head"> Back to top</a></p>
     <p class="info prompt">Share</p>
-    <a href="http://twitter.com/share?text=%5b%20LearnOpenGL.com%20%5d%20-%20Setup%20Gotchas%20on%20Ubuntu%2016.04%20and%20Code%3a%3aBlocks&url=https%3a%2f%2fben-rowan.github.io%2fpost%2fsetup_gotchas_on_ubuntu_16_04_and_code_blocks%2f" title="Share on Twitter"
+    <a href="http://twitter.com/share?text=%5b%20FreeBSD%20%5d%20-%20Working%20WiFi%20on%20Any%20Laptop&url=https%3a%2f%2fben-rowan.github.io%2fpost%2fworking_wifi_on_any_laptop%2f" title="Share on Twitter"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
     </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fben-rowan.github.io%2fpost%2fsetup_gotchas_on_ubuntu_16_04_and_code_blocks%2f" title="Share on Facebook"
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fben-rowan.github.io%2fpost%2fworking_wifi_on_any_laptop%2f" title="Share on Facebook"
         onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
         <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
     </a>
-    <a href="https://plus.google.com/share?url=https%3a%2f%2fben-rowan.github.io%2fpost%2fsetup_gotchas_on_ubuntu_16_04_and_code_blocks%2f" title="Share on Google+"
+    <a href="https://plus.google.com/share?url=https%3a%2f%2fben-rowan.github.io%2fpost%2fworking_wifi_on_any_laptop%2f" title="Share on Google+"
        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
         <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
     </a>
