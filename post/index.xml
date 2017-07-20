@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>Released under the MIT license.</copyright>
-    <lastBuildDate>Sun, 09 Jul 2017 20:16:45 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Jul 2017 18:04:45 +0000</lastBuildDate>
     
 	<atom:link href="https://ben-rowan.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[ FreeBSD ] - So you&#39;ve messed up your /etc/rc.conf</title>
+      <link>https://ben-rowan.github.io/post/so_youve_messed_up_your_rc.conf/</link>
+      <pubDate>Sun, 16 Jul 2017 18:04:45 +0000</pubDate>
+      
+      <guid>https://ben-rowan.github.io/post/so_youve_messed_up_your_rc.conf/</guid>
+      <description>If you&amp;rsquo;ve messed up your /etc/rc.conf then there&amp;rsquo;s a good chance you&amp;rsquo;re unable to boot your system and by extension are unable to fix your mistake.
+To remedy this the first thing you&amp;rsquo;ll want to do is boot the system into &amp;lsquo;Single-User&amp;rsquo; mode. When you boot in this mode you&amp;rsquo;re rc.conf isn&amp;rsquo;t evaluated [citation needed].
+OK so I can just edit the file now, perfect, done!
+Nope.
+If you try and edit rc.</description>
+    </item>
     
     <item>
       <title>[ FreeBSD ] - Working WiFi on Any Laptop</title>

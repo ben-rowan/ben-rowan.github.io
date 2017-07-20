@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>[ FreeBSD ] - Working WiFi on Any Laptop &middot; </title>
+    <title>[ FreeBSD ] - So you&#39;ve messed up your /etc/rc.conf &middot; </title>
     <meta name="author" content="Ben Rowan">
     <meta name="description" content="I&#39;ve created this blog to track my game dev journey.">
     <meta name="generator" content="Hugo 0.25" />
@@ -48,96 +48,59 @@
     
 <article class="post">
     <header>
-        <h1 class="post-title">[ FreeBSD ] - Working WiFi on Any Laptop</h1>
+        <h1 class="post-title">[ FreeBSD ] - So you&#39;ve messed up your /etc/rc.conf</h1>
         <div class="post-meta">
-            <time datetime="09 July 2017">
-                09 July 2017
+            <time datetime="16 July 2017">
+                16 July 2017
             </time>
         </div>
     </header>
 
     <section class="post-content">
-        <p>I recently installed FreeBSD for the first time and installed it on
-my Lenovo X131e. I instantly began battling with it&rsquo;s evil Broadcom
-wireless card. This card had caused me endless trouble on Linux.
-After messing around with it for an hour or two I decided that this
-was the final straw and pulled the card out. I shoved it in a draw
-and plan to never look at it again!</p>
+        
 
-<p></p>
+<p>If you&rsquo;ve messed up your <code>/etc/rc.conf</code> then there&rsquo;s a good chance you&rsquo;re
+unable to boot your system and by extension are unable to fix your mistake.</p>
 
-<p>Phew&hellip; now that&rsquo;s out the way I can get on with describing my
-solution!</p>
+<p>To remedy this the first thing you&rsquo;ll want to do is boot the system into
+&lsquo;Single-User&rsquo; mode. When you boot in this mode you&rsquo;re <code>rc.conf</code> isn&rsquo;t
+evaluated [<em>citation needed</em>].</p>
 
-<p><em>NOTE: this is based on FreeBSD 10.3 and didn&rsquo;t work on TrueOS for me.</em></p>
+<p>OK so I can just edit the file now, perfect, done!</p>
 
-<p><strong>TL;DR</strong></p>
+<p>Nope.</p>
 
-<ul>
-<li><p>Buy this: <a href="https://www.asus.com/uk/Networking/USBN10_NANO/">ASUS USB-N10 Nano</a></p></li>
+<p>If you try and edit <code>rc.conf</code> you&rsquo;ll be faced with the following error:</p>
 
-<li><p>Run the commands from &lsquo;<a href="#getting_it_all_setup">Getting It All Setup</a>&lsquo;</p></li>
-</ul>
-
-<h2 id="asus-usb-n10-nano">ASUS USB-N10 Nano</h2>
-
-<p>I opted to go with a USB wireless card. I knew that if I got this working then
-I could use FreeBSD on any of my laptops (or PC&rsquo;s if needed).</p>
-
-<p>After trawling through the
-<a href="https://www.freebsd.org/relnotes/CURRENT/hardware/support.html">supported hardware list</a>
-I landed on the ASUS N10. It&rsquo;s cheap, really small and can easily be left in my
-laptop full time.</p>
-
-<p><span id="getting_it_all_setup"></span></p>
-
-<h2 id="getting-it-all-setup">Getting It All Setup</h2>
-
-<p>Once you&rsquo;ve installed FreeBSD you&rsquo;ll need to complete the following steps to
-get your WiFi working.</p>
-
-<h3 id="load-the-driver-module">Load the Driver Module</h3>
-
-<p>The ASUS N10 uses the <code>rsu</code> driver. You can get all the information you need
-about this driver by running <code>man rsu</code>.</p>
-
-<p>To load the driver add the following to your <code>/boot/loader.conf</code>:</p>
-
-<pre><code class="language-bash">if_rsu_load=&quot;YES&quot;
-legal.realtek.license_ack=1
-rsu-rtl8712fw_load=&quot;YES&quot;
+<pre><code class="language-bash">$ vi /etc/rc.conf
+...
+ex/vi Error: /etc/rc.conf: Read-only file system
+...
 </code></pre>
 
-<h3 id="setup-the-interface">Setup the Interface</h3>
+<p>The issue here is that the root file system has been mounted as read-only. You
+can see this by running <code>mount</code>.</p>
 
-<p>To setup the interface add the following to your <code>/etc/rc.conf</code>:</p>
-
-<pre><code class="language-bash">wlans_urtwn0=&quot;wlan0&quot;
-ifconfig_wlan0=&quot;WPA DHCP&quot;
+<pre><code class="language-bash">$ mount
+zroot/ROOT/default on / (..., read-only, ...) 
 </code></pre>
 
-<h3 id="configure-the-connection">Configure the Connection</h3>
+<p>To fix this you&rsquo;ll need to run the following command:</p>
 
-<p>And finally to configure your connection add the following to your
-<code>/etc/wpa_supplicant.conf</code> (create it if it&rsquo;s not there):</p>
-
-<pre><code class="language-bash">network={
-    ssid=&quot;&lt; wireless routers SSID &gt;&quot;
-    psk=&quot;&lt; wireless routers password &gt;&quot;
-}
+<pre><code class="language-bash">mount -u /
 </code></pre>
 
-<p>Now you&rsquo;ve completed these three steps it&rsquo;s time to reboot your machine.
-Once it&rsquo;s booted you should be connected to your configured wireless router
-and good to go.</p>
+<p>This mounts root as read / write. You can now edit <code>rc.conf</code> and fix your mistake.</p>
+
+<p>Once you&rsquo;ve finished simple run <code>exit</code> and you&rsquo;ll start the normal boot process, hurray!</p>
 
 <h2 id="references">References</h2>
 
 <ul>
-<li><a href="https://www.asus.com/uk/Networking/USBN10_NANO/">ASUS USB-N10 Nano</a></li>
-<li><a href="https://www.freebsd.org/relnotes/CURRENT/hardware/support.html">Supported Hardware</a></li>
-<li><a href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/network-wireless.html">Wireless Networking</a></li>
+<li><a href="https://www.freebsd.org/doc/handbook/boot-introduction.html">Single-User Mode</a></li>
+<li><a href="https://forums.freebsd.org/threads/5860/">Cannot edit /etc/rc.conf</a></li>
 </ul>
+
     </section>
 
     
@@ -152,15 +115,15 @@ and good to go.</p>
     <section class="share">
     <p class="backtotop"><a data-scroll href="#site-head"><i class="fa fa-lg fa-fw fa-angle-double-up"></i></a><a data-scroll class="backtotoptext" href="#site-head"> Back to top</a></p>
     <p class="info prompt">Share</p>
-    <a href="http://twitter.com/share?text=%5b%20FreeBSD%20%5d%20-%20Working%20WiFi%20on%20Any%20Laptop&url=https%3a%2f%2fben-rowan.github.io%2fpost%2fworking_wifi_on_any_laptop%2f" title="Share on Twitter"
+    <a href="http://twitter.com/share?text=%5b%20FreeBSD%20%5d%20-%20So%20you%27ve%20messed%20up%20your%20%2fetc%2frc.conf&url=https%3a%2f%2fben-rowan.github.io%2fpost%2fso_youve_messed_up_your_rc.conf%2f" title="Share on Twitter"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
     </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fben-rowan.github.io%2fpost%2fworking_wifi_on_any_laptop%2f" title="Share on Facebook"
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fben-rowan.github.io%2fpost%2fso_youve_messed_up_your_rc.conf%2f" title="Share on Facebook"
         onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
         <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
     </a>
-    <a href="https://plus.google.com/share?url=https%3a%2f%2fben-rowan.github.io%2fpost%2fworking_wifi_on_any_laptop%2f" title="Share on Google+"
+    <a href="https://plus.google.com/share?url=https%3a%2f%2fben-rowan.github.io%2fpost%2fso_youve_messed_up_your_rc.conf%2f" title="Share on Google+"
        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
         <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
     </a>
