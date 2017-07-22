@@ -28,12 +28,12 @@
 
     <!-- Stylesheet for theme color -->
     <style type="text/css">
-    a, a:visited {color: #f05948;}
-    .pagination a {color: #f05948;}
-    .gist .gist-file .gist-meta a:visited {color: #f05948 !important;}
-    a:focus, a:hover {color: #c62310;}
-    h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #c62310;}
-    .older-posts:hover, .newer-posts:hover {color: #c62310;}
+    a, a:visited {color: #3498db;}
+    .pagination a {color: #3498db;}
+    .gist .gist-file .gist-meta a:visited {color: #3498db !important;}
+    a:focus, a:hover {color: #2079b4;}
+    h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #2079b4;}
+    .older-posts:hover, .newer-posts:hover {color: #2079b4;}
 </style>
 </head>
 
@@ -131,12 +131,37 @@ ifconfig_wlan0=&quot;WPA DHCP&quot;
 Once it&rsquo;s booted you should be connected to your configured wireless router
 and good to go.</p>
 
+<h2 id="update-22-07-2017">Update - 22/07/2017</h2>
+
+<h3 id="adding-multiple-networks">Adding Multiple Networks</h3>
+
+<p>You&rsquo;re eventually going to want to configure more than one network and you can do
+this by adding multiple network blocks to your <code>/etc/wpa_supplicant.conf</code>. You can
+prioritise these by adding a priority value (this defaults to 0 and higher values
+are selected first).</p>
+
+<pre><code class="language-bash">network={
+    ssid=&quot;&lt; wireless routers SSID &gt;&quot;
+    psk=&quot;&lt; wireless routers password &gt;&quot;
+    priority=&lt; value &gt;= 0 &gt;
+}
+</code></pre>
+
+<h3 id="restarting-wlan0">Restarting wlan0</h3>
+
+<p>Once you&rsquo;ve added your newly configured network you can restart <code>wlan0</code> by running:</p>
+
+<pre><code class="language-bash">$ su
+# service netif restart wlan0
+</code></pre>
+
 <h2 id="references">References</h2>
 
 <ul>
 <li><a href="https://www.asus.com/uk/Networking/USBN10_NANO/">ASUS USB-N10 Nano</a></li>
 <li><a href="https://www.freebsd.org/relnotes/CURRENT/hardware/support.html">Supported Hardware</a></li>
 <li><a href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/network-wireless.html">Wireless Networking</a></li>
+<li>wpa_supplicant.conf(5)</li>
 </ul>
     </section>
 

@@ -28,12 +28,12 @@
 
     <!-- Stylesheet for theme color -->
     <style type="text/css">
-    a, a:visited {color: #f05948;}
-    .pagination a {color: #f05948;}
-    .gist .gist-file .gist-meta a:visited {color: #f05948 !important;}
-    a:focus, a:hover {color: #c62310;}
-    h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #c62310;}
-    .older-posts:hover, .newer-posts:hover {color: #c62310;}
+    a, a:visited {color: #3498db;}
+    .pagination a {color: #3498db;}
+    .gist .gist-file .gist-meta a:visited {color: #3498db !important;}
+    a:focus, a:hover {color: #2079b4;}
+    h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #2079b4;}
+    .older-posts:hover, .newer-posts:hover {color: #2079b4;}
 </style>
 </head>
 
@@ -94,7 +94,7 @@ that was compiled correctly).</p>
 <pre><code>sudo apt-get install libglfw3-dev
 </code></pre>
 
-<p>The tutorial recomended the following compiler flags to let the linker know
+<p>The tutorial recommended the following compiler flags to let the linker know
 where the required libraries are located:</p>
 
 <pre><code>-lGLEW -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi
@@ -127,7 +127,7 @@ Compiler &gt; Global Compiler Settings &gt; Linker Settings &gt; Other Linker Op
 <p>I also had an issue with the <code>nullptr</code>s used in the example code even though
 my version of g++ is <code>5.4.0</code>. I was getting the following error:</p>
 
-<pre><code>error: ‘nullptr’ was not declared in this scope
+<pre><code>error: 'nullptr' was not declared in this scope
 </code></pre>
 
 <p>To fix this I had to add the following compiler flag:</p>
@@ -146,8 +146,8 @@ Compiler &gt; Global Compiler Settings &gt; Compiler Settings &gt; Other Compile
 <p>The final issue I had was with std::cout and std::endl. I was getting the
 following errors:</p>
 
-<pre><code>error: ‘cout’ is not a member of ‘std’
-error: ‘endl’ is not a member of ‘std’
+<pre><code>error: 'cout' is not a member of 'std'
+error: 'endl' is not a member of 'std'
 </code></pre>
 
 <p>In order to fix this I needed to include <code>iostream</code>.</p>
