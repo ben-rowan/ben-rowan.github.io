@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wifi on </title>
+    <link>https://ben-rowan.github.io/tags/wifi/</link>
+    <description>Recent content in Wifi on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>Released under the MIT license.</copyright>
+    <lastBuildDate>Sun, 09 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ben-rowan.github.io/tags/wifi/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[ FreeBSD ] - Working WiFi on Any Laptop</title>
+      <link>https://ben-rowan.github.io/post/working_wifi_on_any_laptop/</link>
+      <pubDate>Sun, 09 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ben-rowan.github.io/post/working_wifi_on_any_laptop/</guid>
+      <description>&lt;p&gt;I recently installed FreeBSD for the first time and installed it on
+my Lenovo X131e. I instantly began battling with it&amp;rsquo;s evil Broadcom
+wireless card. This card had caused me endless trouble on Linux.
+After messing around with it for an hour or two I decided that this
+was the final straw and pulled the card out. I shoved it in a draw
+and plan to never look at it again!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>Released under the MIT license.</copyright>
-    <lastBuildDate>Sun, 16 Jul 2017 18:04:45 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://ben-rowan.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,20 +15,19 @@
     <item>
       <title>[ FreeBSD ] - So you&#39;ve messed up your /etc/rc.conf</title>
       <link>https://ben-rowan.github.io/post/so_youve_messed_up_your_rc.conf/</link>
-      <pubDate>Sun, 16 Jul 2017 18:04:45 +0000</pubDate>
+      <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://ben-rowan.github.io/post/so_youve_messed_up_your_rc.conf/</guid>
-      <description>If you&amp;rsquo;ve messed up your /etc/rc.conf then there&amp;rsquo;s a good chance you&amp;rsquo;re unable to boot your system and by extension are unable to fix your mistake.
-To remedy this the first thing you&amp;rsquo;ll want to do is boot the system into &amp;lsquo;Single-User&amp;rsquo; mode. When you boot in this mode you&amp;rsquo;re rc.conf isn&amp;rsquo;t evaluated [citation needed].
-OK so I can just edit the file now, perfect, done!
-Nope.
-If you try and edit rc.</description>
+      <description>&lt;p&gt;If you&amp;rsquo;ve messed up your &lt;code&gt;/etc/rc.conf&lt;/code&gt; then there&amp;rsquo;s a good chance you&amp;rsquo;re
+unable to boot your system and by extension are unable to fix your mistake.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>[ FreeBSD ] - Working WiFi on Any Laptop</title>
       <link>https://ben-rowan.github.io/post/working_wifi_on_any_laptop/</link>
-      <pubDate>Sun, 09 Jul 2017 20:16:45 +0000</pubDate>
+      <pubDate>Sun, 09 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://ben-rowan.github.io/post/working_wifi_on_any_laptop/</guid>
       <description>&lt;p&gt;I recently installed FreeBSD for the first time and installed it on
@@ -44,7 +43,7 @@ and plan to never look at it again!&lt;/p&gt;
     <item>
       <title>[ LearnOpenGL.com ] - Setup Gotchas on Ubuntu 16.04 and Code::Blocks</title>
       <link>https://ben-rowan.github.io/post/setup_gotchas_on_ubuntu_16_04_and_code_blocks/</link>
-      <pubDate>Sun, 30 Oct 2016 20:04:45 +0000</pubDate>
+      <pubDate>Sun, 30 Oct 2016 00:00:00 +0000</pubDate>
       
       <guid>https://ben-rowan.github.io/post/setup_gotchas_on_ubuntu_16_04_and_code_blocks/</guid>
       <description>&lt;p&gt;I began working through the fantastic OpenGL tutorials on

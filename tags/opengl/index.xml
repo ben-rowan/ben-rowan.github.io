@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Opengl on </title>
+    <link>https://ben-rowan.github.io/tags/opengl/</link>
+    <description>Recent content in Opengl on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>Released under the MIT license.</copyright>
+    <lastBuildDate>Sun, 30 Oct 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ben-rowan.github.io/tags/opengl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[ LearnOpenGL.com ] - Setup Gotchas on Ubuntu 16.04 and Code::Blocks</title>
+      <link>https://ben-rowan.github.io/post/setup_gotchas_on_ubuntu_16_04_and_code_blocks/</link>
+      <pubDate>Sun, 30 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ben-rowan.github.io/post/setup_gotchas_on_ubuntu_16_04_and_code_blocks/</guid>
+      <description>&lt;p&gt;I began working through the fantastic OpenGL tutorials on
+&lt;a href=&#34;http://learnopengl.com/&#34;&gt;learnopengl.com&lt;/a&gt; today and hit a couple of issues
+along the way.&lt;/p&gt;
+
+&lt;p&gt;Most of the issues I hit were caused by the fact that the tutorials
+are heavily biased towards Windows and Visual Studio while I&amp;rsquo;m using
+Ubuntu 16.04 and Code::Blocks.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
