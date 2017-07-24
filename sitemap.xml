@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ben-rowan.github.io/post/disable_lenovo_trackpad/</loc>
+    <lastmod>2017-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ben-rowan.github.io/post/so_youve_messed_up_your_rc.conf/</loc>
     <lastmod>2017-07-16T00:00:00+00:00</lastmod>
   </url>
@@ -19,7 +24,7 @@
   
   <url>
     <loc>https://ben-rowan.github.io/</loc>
-    <lastmod>2017-07-16T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -36,7 +41,13 @@
   
   <url>
     <loc>https://ben-rowan.github.io/tags/freebsd/</loc>
-    <lastmod>2017-07-16T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ben-rowan.github.io/tags/lenovo/</loc>
+    <lastmod>2017-07-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -48,7 +59,13 @@
   
   <url>
     <loc>https://ben-rowan.github.io/post/</loc>
-    <lastmod>2017-07-16T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ben-rowan.github.io/tags/synaptics/</loc>
+    <lastmod>2017-07-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

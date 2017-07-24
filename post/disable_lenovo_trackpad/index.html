@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en-uk">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>[FreeBSD] - Disable Your Lenovo Trackpad &middot; </title>
+    <meta name="author" content="Ben Rowan">
+    <meta name="description" content="Notes on my general meanderings through the world of technology.">
+    <meta name="generator" content="Hugo 0.25" />
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <!-- RSS autodiscovery -->
+    
+
+    <link rel="shortcut icon" href="https://ben-rowan.github.io/img/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://ben-rowan.github.io/css/screen.css">
+    <link rel="stylesheet" href="https://ben-rowan.github.io/css/github.css">
+    <link rel="stylesheet" href="https://ben-rowan.github.io/css/custom.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+    
+
+    
+
+    <!-- Stylesheet for theme color -->
+    <style type="text/css">
+    a, a:visited {color: #3498db;}
+    .pagination a {color: #3498db;}
+    .gist .gist-file .gist-meta a:visited {color: #3498db !important;}
+    a:focus, a:hover {color: #2079b4;}
+    h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #2079b4;}
+    .older-posts:hover, .newer-posts:hover {color: #2079b4;}
+</style>
+</head>
+
+<body class="home-template">
+    <header id="site-head">
+	
+	
+</header>
+    
+    
+    <main class="content" role="main">
+    
+<article class="post">
+    <header>
+        <h1 class="post-title">[FreeBSD] - Disable Your Lenovo Trackpad</h1>
+        <div class="post-meta">
+            <time datetime="24 July 2017">
+                24 July 2017
+            </time>
+        </div>
+    </header>
+
+    <section class="post-content">
+        
+
+<p>It&rsquo;s taken me longer than I would&rsquo;ve liked to work this one out but I&rsquo;ve finally
+managed to disable the trackpad on my Lenovo X131e while still leaving the
+trackpoint (stick) working.</p>
+
+<!-- more -->
+
+<h1 id="enable-moused">Enable moused</h1>
+
+<p>If you&rsquo;re running a graphical environment then you&rsquo;ve most likely already
+completed this step, but if not, you need to add the following to your
+<code>/etc/rc.conf</code>:</p>
+
+<pre><code class="language-bash">moused_enable=&quot;YES&quot;
+</code></pre>
+
+<h1 id="enable-synaptics-support">Enable Synaptics Support</h1>
+
+<p>You&rsquo;ll then need to enable synaptics support by adding the following to your
+<code>/boot/loader.conf</code>:</p>
+
+<pre><code class="language-bash">hw.psm.synaptics_support=&quot;1&quot;
+</code></pre>
+
+<p>This gives you access to the additional synaptics configuration values covered
+on the <a href="https://wiki.freebsd.org/SynapticsTouchpad">FreeBSD wiki</a>.</p>
+
+<h1 id="disable-tap-to-click">Disable Tap To Click</h1>
+
+<p><a href="https://forums.freebsd.org/threads/17370/">Aragon on the FreeBSD forums suggests</a>
+adding the following to <code>/etc/sysctl.conf</code> to disable tap to click. It works
+really well but isn&rsquo;t really what I was looking for:</p>
+
+<pre><code class="language-bash">hw.psm.tap_timeout=0
+</code></pre>
+
+<h1 id="disable-trackpad">Disable Trackpad</h1>
+
+<p>I wanted to totally disable the trackpad so I could use the trackpoint and
+keyboard without ever even moving the mouse. I found adding the following to
+your <code>/etc/sysctl.conf</code> works really well for this. Let me know if you have
+a more elegant / correct solutions for this:</p>
+
+<pre><code class="language-bash">hw.psm.synaptics.min_pressure=220
+</code></pre>
+
+<p>This sets the <code>min_pressure</code> to be the same as the <code>max_pressure</code>.</p>
+
+<h1 id="references">References</h1>
+
+<ul>
+<li><a href="https://wiki.freebsd.org/SynapticsTouchpad">Synaptics Touchpad</a></li>
+<li><a href="https://forums.freebsd.org/threads/17370/">How to disable mousepad tapping?</a></li>
+</ul>
+
+    </section>
+
+    
+    <section class="post-tags" style="padding-bottom:60px;">
+        <div class="post-meta tags">
+            <i class="fa fa-fw fa-tag"></i>
+            
+                
+                <a href="https://ben-rowan.github.io/tags/freebsd">FreeBSD </a>
+            
+                
+                <a href="https://ben-rowan.github.io/tags/lenovo">Lenovo </a>
+            
+                
+                <a href="https://ben-rowan.github.io/tags/synaptics">Synaptics </a>
+            
+        </div>
+    </section>
+    
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ben-rowan" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <section class="share">
+    <p class="backtotop"><a data-scroll href="#site-head"><i class="fa fa-lg fa-fw fa-angle-double-up"></i></a><a data-scroll class="backtotoptext" href="#site-head"> Back to top</a></p>
+    <p class="info prompt">Share</p>
+    <a href="http://twitter.com/share?text=%5bFreeBSD%5d%20-%20Disable%20Your%20Lenovo%20Trackpad&url=https%3a%2f%2fben-rowan.github.io%2fpost%2fdisable_lenovo_trackpad%2f" title="Share on Twitter"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fben-rowan.github.io%2fpost%2fdisable_lenovo_trackpad%2f" title="Share on Facebook"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+    </a>
+    <a href="https://plus.google.com/share?url=https%3a%2f%2fben-rowan.github.io%2fpost%2fdisable_lenovo_trackpad%2f" title="Share on Google+"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+    </a>
+</section>
+
+    <footer class="post-footer">
+        <section class="author">
+    <div class="authorimage" style="background: url(https://ben-rowan.github.io/img/avatar.jpg)"></div>
+    <h4>Ben Rowan</h4>
+    <p class="bio">Full time web developer and dad working in Leeds/Bradford UK.</p>
+    <p class="meta">
+      <i class="fa fa-fw fa-map-marker"></i> Leeds UK
+    </p>
+</section>
+    </footer>
+    
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+	<div class="inner">
+		<section class="footer-social">
+      
+      
+      
+      
+      
+      
+      <a href="//github.com/ben-rowan" target="_blank" title="GitHub"><i class="fa fa-2x fa-fw fa-github"></i> <span class="hidden">GitHub</span></a>&nbsp;
+      
+      
+      
+      
+  </section>
+
+		<section class="copyright">&copy; 2017 <a href="https://ben-rowan.github.io/">Ben Rowan</a>. Released under the MIT license.</section>
+	</div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ben-rowan.github.io/js/index.js"></script>
+<script src="https://ben-rowan.github.io/js/smooth-scroll.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+
+<script>
+    smoothScroll.init({
+        speed: 800,
+        easing: 'easeInOutCubic',
+        updateURL: false,
+        offset: 125,
+    });
+</script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-103003203-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</body>
+</html>
