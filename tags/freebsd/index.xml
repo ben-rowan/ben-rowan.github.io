@@ -18,9 +18,11 @@
       <pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://ben-rowan.github.io/post/disable_lenovo_trackpad/</guid>
-      <description>It&amp;rsquo;s taken me longer than I would&amp;rsquo;ve liked to work this one out but I&amp;rsquo;ve finally managed to disable the trackpad on my Lenovo X131e while still leaving the trackpoint (stick) working.
-Enable moused If you&amp;rsquo;re running a graphical environment then you&amp;rsquo;ve most likely already completed this step, but if not, you need to add the following to your /etc/rc.conf:
-moused_enable=&amp;quot;YES&amp;quot;  Enable Synaptics Support You&amp;rsquo;ll then need to enable synaptics support by adding the following to your /boot/loader.</description>
+      <description>&lt;p&gt;It&amp;rsquo;s taken me longer than I would&amp;rsquo;ve liked to work this one out but I&amp;rsquo;ve finally
+managed to disable the trackpad on my Lenovo X131e while still leaving the
+trackpoint (stick) working.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
