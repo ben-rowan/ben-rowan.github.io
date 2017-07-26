@@ -13,7 +13,7 @@
     
     
     <item>
-      <title>FreeBSD: Set Primary Nameservers in resolv.conf</title>
+      <title>FreeBSD: Set Primary Nameserver(s) in resolv.conf</title>
       <link>https://ben-rowan.github.io/post/configure_nameserver/</link>
       <pubDate>Wed, 26 Jul 2017 00:00:00 +0000</pubDate>
       
