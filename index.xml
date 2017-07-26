@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>Released under the MIT license.</copyright>
-    <lastBuildDate>Mon, 24 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 26 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://ben-rowan.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>FreeBSD: Set Primary Nameservers in resolv.conf</title>
+      <link>https://ben-rowan.github.io/post/configure_nameserver/</link>
+      <pubDate>Wed, 26 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ben-rowan.github.io/post/configure_nameserver/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been having trouble with my ISP&amp;rsquo;s nameserver so I wanted to switch over
+to &lt;a href=&#34;https://developers.google.com/speed/public-dns/&#34;&gt;Google&amp;rsquo;s public DNS&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>FreeBSD: Disable Your Lenovo Trackpad</title>

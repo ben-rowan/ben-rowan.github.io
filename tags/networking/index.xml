@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Freebsd on </title>
-    <link>https://ben-rowan.github.io/tags/freebsd/</link>
-    <description>Recent content in Freebsd on </description>
+    <title>Networking on </title>
+    <link>https://ben-rowan.github.io/tags/networking/</link>
+    <description>Recent content in Networking on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>Released under the MIT license.</copyright>
     <lastBuildDate>Wed, 26 Jul 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ben-rowan.github.io/tags/freebsd/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ben-rowan.github.io/tags/networking/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,31 +20,6 @@
       <guid>https://ben-rowan.github.io/post/configure_nameserver/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve been having trouble with my ISP&amp;rsquo;s nameserver so I wanted to switch over
 to &lt;a href=&#34;https://developers.google.com/speed/public-dns/&#34;&gt;Google&amp;rsquo;s public DNS&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>FreeBSD: Disable Your Lenovo Trackpad</title>
-      <link>https://ben-rowan.github.io/post/disable_lenovo_trackpad/</link>
-      <pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://ben-rowan.github.io/post/disable_lenovo_trackpad/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s taken me longer than I would&amp;rsquo;ve liked to work this one out but I&amp;rsquo;ve finally
-managed to disable the trackpad on my Lenovo X131e while still leaving the
-trackpoint (stick) working.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>FreeBSD: So you&#39;ve messed up your /etc/rc.conf</title>
-      <link>https://ben-rowan.github.io/post/so_youve_messed_up_your_rc.conf/</link>
-      <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://ben-rowan.github.io/post/so_youve_messed_up_your_rc.conf/</guid>
-      <description>&lt;p&gt;If you&amp;rsquo;ve messed up your &lt;code&gt;/etc/rc.conf&lt;/code&gt; then there&amp;rsquo;s a good chance you&amp;rsquo;re
-unable to boot your system and by extension are unable to fix your mistake.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

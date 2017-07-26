@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>Released under the MIT license.</copyright>
-    <lastBuildDate>Sun, 16 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 26 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://ben-rowan.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Config</title>
       <link>https://ben-rowan.github.io/tags/config/</link>
-      <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 26 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://ben-rowan.github.io/tags/config/</guid>
       <description></description>
@@ -24,7 +24,7 @@
     <item>
       <title>Freebsd</title>
       <link>https://ben-rowan.github.io/tags/freebsd/</link>
-      <pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 26 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://ben-rowan.github.io/tags/freebsd/</guid>
       <description></description>
@@ -36,6 +36,15 @@
       <pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://ben-rowan.github.io/tags/lenovo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Networking</title>
+      <link>https://ben-rowan.github.io/tags/networking/</link>
+      <pubDate>Wed, 26 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ben-rowan.github.io/tags/networking/</guid>
       <description></description>
     </item>
     
